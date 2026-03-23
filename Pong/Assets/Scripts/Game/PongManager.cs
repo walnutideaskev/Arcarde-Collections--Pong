@@ -9,61 +9,82 @@ namespace WalnutIdeas
         [Header("References")]
         [SerializeField] private BallController ball;
         [SerializeField] private Transform ballSpawnPoint;
-
         [SerializeField] private TextMeshProUGUI leftScoreText;
         [SerializeField] private TextMeshProUGUI rightScoreText;
+        [SerializeField] private TextMeshProUGUI winnerTextBox;
 
         [Header("Settings")]
         [SerializeField] private float roundStartDelay = 1.5f;
-        [SerializeField] private float scoreToWin = 3f;
+        [SerializeField] private int scoreToWin = 3;
 
         private int m_PlayerScore = 0;
         private int m_CpuScore = 0;
-        private bool m_RoundOver;
+        private bool m_RoundOver = false;
 
         private void Start()
         {
             UpdateUI();
             StartCoroutine(StartRound());
+            this.winnerTextBox.gameObject.SetActive(false);
         }
 
         public void ScorePlayer()
         {
-            this.m_PlayerScore++;
+            if (m_RoundOver) return;
+
+            m_PlayerScore++;
             UpdateUI();
 
             AudioManager.Instance?.PlayScore();
             CameraShake.Instance?.Shake(0.12f, 0.15f);
 
-            StartCoroutine(StartRound());
+            CheckWinCondition();
         }
 
         public void ScoreCPU()
         {
-            this.m_CpuScore++;
+            if (m_RoundOver) return;
+
+            m_CpuScore++;
             UpdateUI();
 
             AudioManager.Instance?.PlayScore();
             CameraShake.Instance?.Shake(0.12f, 0.15f);
 
-            StartCoroutine(StartRound());
+            CheckWinCondition();
         }
 
         private void UpdateUI()
         {
-            leftScoreText.text = this.m_PlayerScore.ToString();
-            rightScoreText.text = this.m_CpuScore.ToString();
+            if (leftScoreText != null)
+                leftScoreText.text = m_PlayerScore.ToString();
+
+            if (rightScoreText != null)
+                rightScoreText.text = m_CpuScore.ToString();
         }
 
-        private void CheckWindCondition()
+        private void CheckWinCondition()
         {
-            if (this.m_PlayerScore >=  this.m_CpuScore || this.m_CpuScore >= this.m_PlayerScore)
+            if (m_PlayerScore >= scoreToWin)
             {
-                this.m_RoundOver = true;
-                Debug.Log(this.m_PlayerScore >= this.scoreToWin ? "Player Wins!" : "CPU Wins!");
+                m_RoundOver = true;
+                //Debug.Log("Player Wins!");
+                this.winnerTextBox.gameObject.SetActive(true);
+                this.winnerTextBox.text = "Player Win";
+                ball.ResetBall(ballSpawnPoint.position);
+                return;
             }
-            
-            Invoke(nameof(this.StartRound), this.roundStartDelay);
+
+            if (m_CpuScore >= scoreToWin)
+            {
+                m_RoundOver = true;
+                this.winnerTextBox.gameObject.SetActive(true);
+                this.winnerTextBox.text = "CPU Win";
+                ball.ResetBall(ballSpawnPoint.position);
+                return;
+            }
+
+            StartCoroutine(StartRound());
         }
 
         private IEnumerator StartRound()
@@ -72,7 +93,8 @@ namespace WalnutIdeas
 
             yield return new WaitForSeconds(roundStartDelay);
 
-            ball.Launch();
+            if (!m_RoundOver)
+                ball.Launch();
         }
     }
 }

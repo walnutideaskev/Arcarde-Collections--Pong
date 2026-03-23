@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace DefaultNamespace
@@ -58,18 +59,21 @@ namespace DefaultNamespace
         {
             audioSource.PlayOneShot(btnClickClip);
             Debug.Log("BestOfTheeButton_Click");
+            SceneManager.LoadScene(1);
         }
 
         public void BestOfFiveButtonSP_Click()
         {
             audioSource.PlayOneShot(btnClickClip);
             Debug.Log("BestOfFiveButton_Click");
+            SceneManager.LoadScene(2);
         }
         
         public void PracticeModeButtonSP_Click()
         {
             audioSource.PlayOneShot(btnClickClip);
             Debug.Log("PracticeModeButton_Click");
+            SceneManager.LoadScene(3);
         }
         
         
