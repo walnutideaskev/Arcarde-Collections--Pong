@@ -48,15 +48,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\WalnutIdeas\Miscellaneous\UIWorldCanvasScaleByCamera.cs" />
-    <Compile Include="Assets\Scripts\PaddleHitEffect.cs" />
-    <Compile Include="Assets\Scripts\PaddleController.cs" />
-    <Compile Include="Assets\Scripts\GoalController.cs" />
     <Compile Include="Assets\Scripts\WalnutIdeas\Miscellaneous\UICanvasAspectResize.cs" />
-    <Compile Include="Assets\Scripts\PongManager.cs" />
+    <Compile Include="Assets\Scripts\Game\CameraShaker.cs" />
+    <Compile Include="Assets\Scripts\Game\PongAudioManager.cs" />
+    <Compile Include="Assets\Scripts\Game\PongManager.cs" />
+    <Compile Include="Assets\Scripts\Game\BallController.cs" />
+    <Compile Include="Assets\Scripts\Game\PaddleHitEffect.cs" />
     <Compile Include="Assets\Scripts\WalnutIdeas\Miscellaneous\UICanvasAnchorToCamera.cs" />
-    <Compile Include="Assets\Scripts\CameraShaker.cs" />
-    <Compile Include="Assets\Scripts\BallController.cs" />
-    <Compile Include="Assets\Scripts\PongAudioManager.cs" />
+    <Compile Include="Assets\Scripts\Game\AIPaddleController.cs" />
+    <Compile Include="Assets\Scripts\Game\PaddleController.cs" />
+    <Compile Include="Assets\Scripts\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\Game\GoalController.cs" />
     <None Include="Assets\Settings\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Settings\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Settings\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />

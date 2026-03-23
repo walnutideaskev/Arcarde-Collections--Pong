@@ -13,9 +13,9 @@ namespace WalnutIdeas
                 return;
 
             if (isLeftGoal)
-                manager.ScoreRight();
+                manager.ScoreCPU();
             else
-                manager.ScoreLeft();
+                manager.ScorePlayer();
         }
     }
 }
